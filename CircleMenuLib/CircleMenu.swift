@@ -65,6 +65,9 @@ func Init<Type>(value: Type, @noescape block: (object: Type) -> Void) -> Type {
    - parameter atIndex:    Selected button index
    */
   optional func circleMenu(circleMenu: CircleMenu, buttonDidSelected button: UIButton, atIndex: Int)
+    
+  
+  optional func circleMenu(circleMenu: CircleMenu, isOpen: Bool)
 }
 
 // MARK: CircleMenu
@@ -236,7 +239,10 @@ public class CircleMenu: UIButton {
   
   func onTap() {
     if buttonsIsShown() == false {
+      delegate?.circleMenu?(self, isOpen: true)
       buttons = createButtons()
+    } else {
+      delegate?.circleMenu?(self, isOpen: false)
     }
     let isShow = !buttonsIsShown()
     let duration  = isShow ? 0.5 : 0.2

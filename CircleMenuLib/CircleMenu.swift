@@ -68,6 +68,8 @@ func Init<Type>(value: Type, @noescape block: (object: Type) -> Void) -> Type {
     
   
   optional func circleMenu(circleMenu: CircleMenu, isOpen: Bool)
+    
+  optional func closeAnimationCompletion()
 }
 
 // MARK: CircleMenu
@@ -87,7 +89,7 @@ public class CircleMenu: UIButton {
   @IBInspectable public var showDelay: Double = 0 
   
   /// The object that acts as the delegate of the circle menu.
-  @IBOutlet weak public var delegate: AnyObject? //CircleMenuDelegate?
+  @IBOutlet weak public var delegate: CircleMenuDelegate? //CircleMenuDelegate?
   
   var buttons: [UIButton]?
   

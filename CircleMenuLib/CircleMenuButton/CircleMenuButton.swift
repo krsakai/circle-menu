@@ -25,6 +25,7 @@ import UIKit
 
 internal class CircleMenuButton: UIButton {
 
+    private var delegate: CircleMenuDelegate!
     // MARK: properties
 
     internal weak var container: UIView?
@@ -36,7 +37,7 @@ internal class CircleMenuButton: UIButton {
 
         self.backgroundColor = UIColor(colorLiteralRed: 0.79, green: 0.24, blue: 0.27, alpha: 1)
         self.layer.cornerRadius = size.height / 2.0
-
+        self.delegate = circleMenu.delegate
         let aContainer = createContainer(CGSize(width: size.width, height:CGFloat(distance)), circleMenu: circleMenu)
 
         // hack view for rotate
@@ -189,7 +190,7 @@ internal extension CircleMenuButton {
                 self.transform = CGAffineTransformMakeScale(0.01, 0.01)
             }, completion: { (success) -> Void in
                 self.alpha = 0
-
+                self.delegate?.closeAnimationCompletion?()
                 if let _ = self.container {
                     container.removeFromSuperview() // remove container
                 }
